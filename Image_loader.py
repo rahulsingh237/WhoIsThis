@@ -1,11 +1,11 @@
 import cv2
-import os 
+import os
 import numpy as np
 
 def main(name):
    capture=cv2.VideoCapture(0)
 
-   cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+   cascade=cv2.CascadeClassifier("E:\\My Python projects\\FaceLock\\haarcascade_frontalface_default.xml")
 
    data=[]
    while True:
@@ -18,14 +18,15 @@ def main(name):
             myface=image[y:y+h,x:x+w,:]
             myface=cv2.resize(myface,(50,50))
             if len(data)<=100:
-               print(len(data))
+               #print(len(data))
                data.append(myface)
          
          cv2.imshow("Saving your face",image)
          if cv2.waitKey(1) & 0xff==27 or len(data)>=100:
             break
    arr=np.array(data)
-   name='%s.npy'%name
-   np.save(os.path.join('Image_files',name),arr)
+   filename = '%s.npy'%name
+   np.save(os.path.join('Image_files',filename),arr)
+   #np.save(filename,arr)
    capture.release()
    cv2.destroyAllWindows()

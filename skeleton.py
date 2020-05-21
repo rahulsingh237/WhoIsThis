@@ -26,8 +26,6 @@ def newUser():
     register(fname,lname,i,a,p)
 
 
-
-
 def existingUser():
     i = input("\n\nEnter ID: ")
     iterator = 3
