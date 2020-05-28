@@ -1,5 +1,6 @@
 import csv
 import Image_loader as im
+import recognizer as re
 
 def register(fname,lname,ID,age,password):
     file = open('data.csv','a',newline='')
@@ -16,6 +17,19 @@ def images(name):
     print('Please look into the camera for accurate results')
     print('Starting in 3..2..1...')
     im.main(filename)
+    print('Your face is registered.\n\n Thank you.')
+    welcomePage()
+
+def faceRecog(name):
+    n=name
+    print('Initializing face recognition...')
+    check = re.recognizerLogic(n)
+    if check:
+        print('Welcome to the netowrk ',name)
+    else:
+        print('\n\n Not recognized. Returning to the welcome page..')
+        welcomePage()
+
 
 def newUser():
     fname = input("\n\nEnter your first name: ")
@@ -24,6 +38,8 @@ def newUser():
     i = int(input("\n\nEnter id: "))
     p = input("\n\nEnter your password: ")
     register(fname,lname,i,a,p)
+
+
 
 
 def existingUser():
@@ -35,7 +51,8 @@ def existingUser():
             while(iterator > 0):
                 p = input("\n\nEnter password: ")
                 if row[4]==p:
-                    print("\n\n\t\tWelcome to the network",row[0],row[1])
+                    print('\n\n\t\tInitializing face recognition.')
+                    faceRecog(row[0])
                     break
                 else:
                     print("\n\nWrong password !!")
